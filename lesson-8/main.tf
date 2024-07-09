@@ -1,26 +1,45 @@
 /*
 Terraform
-Output
+Depends On
 */
 
 provider "aws" {}
+
+resource "aws_instance" "my_databaseserver" {
+  ami                    = "ami-06c68f701d8090592" # Amazon Linux
+  instance_type          = "t2.micro"
+  key_name               = "rsa-virginia"
+  vpc_security_group_ids = [aws_security_group.my_websever.id]
+
+  tags = {
+    Name = "My DataBase Server"
+  }
+}
 
 resource "aws_instance" "my_websever" {
   ami                    = "ami-06c68f701d8090592" # Amazon Linux
   instance_type          = "t2.micro"
   key_name               = "rsa-virginia"
   vpc_security_group_ids = [aws_security_group.my_websever.id]
-  user_data = templatefile("user_data.sh.tpl", {
-    f_name = "lex",
-    l_name = "vakhnenzon",
-    list   = ["111", "222", "333", "444", "555"]
-  })
 
   tags = {
-    Name  = "My Webserver"
-    Owner = "Vakhnenzon"
+    Name = "My Web Server"
   }
 
+  depends_on = [aws_instance.my_databaseserver] # сервер будет создан тольео после my_databaseserver
+}
+
+resource "aws_instance" "my_applicationserver" {
+  ami                    = "ami-06c68f701d8090592" # Amazon Linux
+  instance_type          = "t2.micro"
+  key_name               = "rsa-virginia"
+  vpc_security_group_ids = [aws_security_group.my_websever.id]
+
+  tags = {
+    Name = "My Application Server"
+  }
+
+  depends_on = [aws_instance.my_databaseserver] # сервер будет создан тольео после my_databaseserver
 }
 
 resource "aws_security_group" "my_websever" {
