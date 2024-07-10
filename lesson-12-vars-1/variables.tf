@@ -11,7 +11,6 @@ variable "instance_type" {
   default     = "t3.small"
 }
 
-
 variable "allow_ports" {
   description = "List of Ports to open for server"
   type        = list
@@ -22,7 +21,6 @@ variable "enable_detailed_monitoring" {
   type    = bool
   default = false
 }
-
 
 variable "common_tags" {
   description = "Common Tags to apply to all resources"
