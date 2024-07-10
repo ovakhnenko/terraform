@@ -12,7 +12,7 @@ resource "aws_instance" "vm" {
   ami           = each.value.ami
   instance_type = each.value.vm_size
   tags = {
-    Name = each.key
+    name = each.key
   }
 
 }
