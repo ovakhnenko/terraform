@@ -52,7 +52,6 @@ resource "aws_security_group" "web" {
   }
 }
 
-
 resource "aws_launch_configuration" "web" {
   //  name            = "WebServer-Highly-Available-LC"
   name_prefix     = "WebServer-Highly-Available-LC-"
@@ -65,8 +64,6 @@ resource "aws_launch_configuration" "web" {
     create_before_destroy = true
   }
 }
-
-
 
 resource "aws_autoscaling_group" "web" {
   name                 = "ASG-${aws_launch_configuration.web.name}"
@@ -96,7 +93,6 @@ resource "aws_autoscaling_group" "web" {
   }
 }
 
-
 resource "aws_elb" "web" {
   name               = "WebServer-HA-ELB"
   availability_zones = [data.aws_availability_zones.available.names[0], data.aws_availability_zones.available.names[1]]
@@ -118,7 +114,6 @@ resource "aws_elb" "web" {
     Name = "WebServer-Highly-Available-ELB"
   }
 }
-
 
 resource "aws_default_subnet" "default_az1" {
   availability_zone = data.aws_availability_zones.available.names[0]

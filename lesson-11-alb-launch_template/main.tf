@@ -11,7 +11,7 @@
 #-----------------------------------------------------------
 
 provider "aws" {
-  region = "ca-central-1"
+  #region = "ca-central-1"
 
   default_tags {
     tags = {
@@ -21,7 +21,6 @@ provider "aws" {
     }
   }
 }
-
 
 data "aws_availability_zones" "working" {}
 data "aws_ami" "latest_amazon_linux" {
