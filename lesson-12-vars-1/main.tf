@@ -25,7 +25,6 @@ resource "aws_eip" "my_static_ip" {
   vpc      = true # Need to add in new AWS Provider version
   instance = aws_instance.my_server.id
   tags     = merge(var.common_tags, { Name = "${var.common_tags["Environment"]} Server IP" })
-
 }
 
 resource "aws_instance" "my_server" {
@@ -35,7 +34,6 @@ resource "aws_instance" "my_server" {
   monitoring             = var.enable_detailed_monitoring
 
   tags = merge(var.common_tags, { Name = "${var.common_tags["Environment"]} Server Build by Terraform" })
-
 }
 
 resource "aws_security_group" "my_server" {
@@ -59,5 +57,4 @@ resource "aws_security_group" "my_server" {
   }
 
   tags = merge(var.common_tags, { Name = "${var.common_tags["Environment"]} Server SecurityGroup" })
-
 }
