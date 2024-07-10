@@ -1,4 +1,14 @@
-# main.tf
+/*
+Dynamic
+*/
+provider "aws" {
+  default_tags {
+    tags = {
+      CreatedBy = "Terraform"
+    }
+  }
+}
+
 locals {
   virtuals_mashines = {
     "vm1" = { vm_size = "t2.micro", zone = "us-east-1", ami = "ami-06c68f701d8090592" },
@@ -12,7 +22,7 @@ resource "aws_instance" "vm" {
   ami           = each.value.ami
   instance_type = each.value.vm_size
   tags = {
-    name = each.key
+    Name = each.key
   }
 
 }
