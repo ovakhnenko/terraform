@@ -6,14 +6,14 @@
 # Made by Denis Astahov
 #----------------------------------------------------------
 provider "aws" {
-  region = "ca-central-1"
+  #region = "ca-central-1"
 }
 
 terraform {
   backend "s3" {
-    bucket = "denis-astahov-project-kgb-terraform-state" // Bucket where to SAVE Terraform State
-    key    = "dev/network/terraform.tfstate"             // Object name in the bucket to SAVE Terraform State
-    region = "us-east-1"                                 // Region where bycket created
+    bucket = "vakhnenzon-project-terraform-state" // Bucket where to SAVE Terraform State
+    key    = "dev/network/terraform.tfstate"      // Object name in the bucket to SAVE Terraform State
+    region = "us-east-1"                          // Region where bycket created
   }
 }
 
@@ -35,7 +35,6 @@ resource "aws_internet_gateway" "main" {
   }
 }
 
-
 resource "aws_subnet" "public_subnets" {
   count                   = length(var.public_subnet_cidrs)
   vpc_id                  = aws_vpc.main.id
@@ -46,7 +45,6 @@ resource "aws_subnet" "public_subnets" {
     Name = "${var.env}-puvlic-${count.index + 1}"
   }
 }
-
 
 resource "aws_route_table" "public_subnets" {
   vpc_id = aws_vpc.main.id
