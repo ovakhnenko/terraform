@@ -1,6 +1,8 @@
-Future Terraform Code :)
+
+/*Future Terraform Code :)
 
 Do it yourself!
+*/
 
 terraform {
   backend "s3" {
