@@ -1,6 +1,9 @@
 # AWS Init
 aws-init.bat
 
+# github.com
+github.com/
+
 # Local .terraform directories
 .terraform*
 **/.terraform/*
